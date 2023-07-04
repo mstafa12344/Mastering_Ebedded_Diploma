@@ -1,0 +1,3 @@
+C:/Users/zas/Desktop/imt exam/Data_Basse_linked_list/cmake-build-debug/CMakeFiles/Data_Basse_linked_list.dir
+C:/Users/zas/Desktop/imt exam/Data_Basse_linked_list/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/zas/Desktop/imt exam/Data_Basse_linked_list/cmake-build-debug/CMakeFiles/rebuild_cache.dir
