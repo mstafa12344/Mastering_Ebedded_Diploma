@@ -1,0 +1,970 @@
+
+Digital Clock.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000410  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  00000464  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  00000464  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000494  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 000000b0  00000000  00000000  000004d0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000e3e  00000000  00000000  00000580  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 0000082c  00000000  00000000  000013be  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000074d  00000000  00000000  00001bea  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  0000010c  00000000  00000000  00002338  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000004f7  00000000  00000000  00002444  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000768  00000000  00000000  0000293b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000070  00000000  00000000  000030a3  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+  60:	0e 94 e3 00 	call	0x1c6	; 0x1c6 <main>
+  64:	0c 94 06 02 	jmp	0x40c	; 0x40c <_exit>
+
+00000068 <__bad_interrupt>:
+  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000006c <DIO_voidInit>:
+#include "DIO_priv.h"
+
+void DIO_voidInit(void)
+{
+	
+	DDRA = CONC(DIO_u8DIR_PIN_7,DIO_u8DIR_PIN_6,DIO_u8DIR_PIN_5,DIO_u8DIR_PIN_4,DIO_u8DIR_PIN_3,DIO_u8DIR_PIN_2,DIO_u8DIR_PIN_1,DIO_u8DIR_PIN_0);
+  6c:	8d e1       	ldi	r24, 0x1D	; 29
+  6e:	8a bb       	out	0x1a, r24	; 26
+	DDRB = CONC(DIO_u8DIR_PIN_15,DIO_u8DIR_PIN_14,DIO_u8DIR_PIN_13,DIO_u8DIR_PIN_12,DIO_u8DIR_PIN_11,DIO_u8DIR_PIN_10,DIO_u8DIR_PIN_9,DIO_u8DIR_PIN_8);
+  70:	80 eb       	ldi	r24, 0xB0	; 176
+  72:	87 bb       	out	0x17, r24	; 23
+	DDRC = CONC(DIO_u8DIR_PIN_23,DIO_u8DIR_PIN_22,DIO_u8DIR_PIN_21,DIO_u8DIR_PIN_20,DIO_u8DIR_PIN_19,DIO_u8DIR_PIN_18,DIO_u8DIR_PIN_17,DIO_u8DIR_PIN_16);
+  74:	14 ba       	out	0x14, r1	; 20
+	DDRD = CONC(DIO_u8DIR_PIN_31,DIO_u8DIR_PIN_30,DIO_u8DIR_PIN_29,DIO_u8DIR_PIN_28,DIO_u8DIR_PIN_27,DIO_u8DIR_PIN_26,DIO_u8DIR_PIN_25,DIO_u8DIR_PIN_24);
+  76:	11 ba       	out	0x11, r1	; 17
+  78:	08 95       	ret
+
+0000007a <DIO_enuWritePin>:
+}
+
+tenuErrorStatus DIO_enuWritePin(uint8  u8PinNumCpy ,uint8 u8PinValueCpy)
+{
+  tenuErrorStatus  enuReturnStatusLoc = E_OK ;
+  if(u8PinNumCpy >=0 && u8PinNumCpy <=7)
+  7a:	88 30       	cpi	r24, 0x08	; 8
+  7c:	10 f5       	brcc	.+68     	; 0xc2 <DIO_enuWritePin+0x48>
+  {
+	  switch(u8PinValueCpy)
+  7e:	66 23       	and	r22, r22
+  80:	19 f0       	breq	.+6      	; 0x88 <DIO_enuWritePin+0xe>
+  82:	61 30       	cpi	r22, 0x01	; 1
+  84:	81 f0       	breq	.+32     	; 0xa6 <DIO_enuWritePin+0x2c>
+  86:	95 c0       	rjmp	.+298    	; 0x1b2 <DIO_enuWritePin+0x138>
+	  {
+		  case 0 :
+		  CLR_BIT(ODRA , u8PinNumCpy);
+  88:	4b b3       	in	r20, 0x1b	; 27
+  8a:	21 e0       	ldi	r18, 0x01	; 1
+  8c:	30 e0       	ldi	r19, 0x00	; 0
+  8e:	b9 01       	movw	r22, r18
+  90:	02 c0       	rjmp	.+4      	; 0x96 <DIO_enuWritePin+0x1c>
+  92:	66 0f       	add	r22, r22
+  94:	77 1f       	adc	r23, r23
+  96:	8a 95       	dec	r24
+  98:	e2 f7       	brpl	.-8      	; 0x92 <DIO_enuWritePin+0x18>
+  9a:	cb 01       	movw	r24, r22
+  9c:	80 95       	com	r24
+  9e:	84 23       	and	r24, r20
+  a0:	8b bb       	out	0x1b, r24	; 27
+	DDRD = CONC(DIO_u8DIR_PIN_31,DIO_u8DIR_PIN_30,DIO_u8DIR_PIN_29,DIO_u8DIR_PIN_28,DIO_u8DIR_PIN_27,DIO_u8DIR_PIN_26,DIO_u8DIR_PIN_25,DIO_u8DIR_PIN_24);
+}
+
+tenuErrorStatus DIO_enuWritePin(uint8  u8PinNumCpy ,uint8 u8PinValueCpy)
+{
+  tenuErrorStatus  enuReturnStatusLoc = E_OK ;
+  a2:	80 e0       	ldi	r24, 0x00	; 0
+  {
+	  switch(u8PinValueCpy)
+	  {
+		  case 0 :
+		  CLR_BIT(ODRA , u8PinNumCpy);
+		  break;
+  a4:	08 95       	ret
+		  case 1 :
+		  SET_BIT(ODRA , u8PinNumCpy);
+  a6:	4b b3       	in	r20, 0x1b	; 27
+  a8:	21 e0       	ldi	r18, 0x01	; 1
+  aa:	30 e0       	ldi	r19, 0x00	; 0
+  ac:	b9 01       	movw	r22, r18
+  ae:	02 c0       	rjmp	.+4      	; 0xb4 <DIO_enuWritePin+0x3a>
+  b0:	66 0f       	add	r22, r22
+  b2:	77 1f       	adc	r23, r23
+  b4:	8a 95       	dec	r24
+  b6:	e2 f7       	brpl	.-8      	; 0xb0 <DIO_enuWritePin+0x36>
+  b8:	cb 01       	movw	r24, r22
+  ba:	84 2b       	or	r24, r20
+  bc:	8b bb       	out	0x1b, r24	; 27
+	DDRD = CONC(DIO_u8DIR_PIN_31,DIO_u8DIR_PIN_30,DIO_u8DIR_PIN_29,DIO_u8DIR_PIN_28,DIO_u8DIR_PIN_27,DIO_u8DIR_PIN_26,DIO_u8DIR_PIN_25,DIO_u8DIR_PIN_24);
+}
+
+tenuErrorStatus DIO_enuWritePin(uint8  u8PinNumCpy ,uint8 u8PinValueCpy)
+{
+  tenuErrorStatus  enuReturnStatusLoc = E_OK ;
+  be:	80 e0       	ldi	r24, 0x00	; 0
+		  case 0 :
+		  CLR_BIT(ODRA , u8PinNumCpy);
+		  break;
+		  case 1 :
+		  SET_BIT(ODRA , u8PinNumCpy);
+		  break;
+  c0:	08 95       	ret
+		  default:
+		   enuReturnStatusLoc = E_NOK_PARAM_OUT_OF_RANGE;
+		  break;
+	  }
+  }
+  else if(u8PinNumCpy >=8 && u8PinNumCpy <=15)
+  c2:	98 ef       	ldi	r25, 0xF8	; 248
+  c4:	98 0f       	add	r25, r24
+  c6:	98 30       	cpi	r25, 0x08	; 8
+  c8:	20 f5       	brcc	.+72     	; 0x112 <DIO_enuWritePin+0x98>
+  {
+	  switch(u8PinValueCpy)
+  ca:	66 23       	and	r22, r22
+  cc:	19 f0       	breq	.+6      	; 0xd4 <DIO_enuWritePin+0x5a>
+  ce:	61 30       	cpi	r22, 0x01	; 1
+  d0:	89 f0       	breq	.+34     	; 0xf4 <DIO_enuWritePin+0x7a>
+  d2:	71 c0       	rjmp	.+226    	; 0x1b6 <DIO_enuWritePin+0x13c>
+	  {
+		  case 0 :
+		  CLR_BIT(ODRB , u8PinNumCpy%8);
+  d4:	48 b3       	in	r20, 0x18	; 24
+  d6:	87 70       	andi	r24, 0x07	; 7
+  d8:	21 e0       	ldi	r18, 0x01	; 1
+  da:	30 e0       	ldi	r19, 0x00	; 0
+  dc:	b9 01       	movw	r22, r18
+  de:	02 c0       	rjmp	.+4      	; 0xe4 <DIO_enuWritePin+0x6a>
+  e0:	66 0f       	add	r22, r22
+  e2:	77 1f       	adc	r23, r23
+  e4:	8a 95       	dec	r24
+  e6:	e2 f7       	brpl	.-8      	; 0xe0 <DIO_enuWritePin+0x66>
+  e8:	cb 01       	movw	r24, r22
+  ea:	80 95       	com	r24
+  ec:	84 23       	and	r24, r20
+  ee:	88 bb       	out	0x18, r24	; 24
+	DDRD = CONC(DIO_u8DIR_PIN_31,DIO_u8DIR_PIN_30,DIO_u8DIR_PIN_29,DIO_u8DIR_PIN_28,DIO_u8DIR_PIN_27,DIO_u8DIR_PIN_26,DIO_u8DIR_PIN_25,DIO_u8DIR_PIN_24);
+}
+
+tenuErrorStatus DIO_enuWritePin(uint8  u8PinNumCpy ,uint8 u8PinValueCpy)
+{
+  tenuErrorStatus  enuReturnStatusLoc = E_OK ;
+  f0:	80 e0       	ldi	r24, 0x00	; 0
+  {
+	  switch(u8PinValueCpy)
+	  {
+		  case 0 :
+		  CLR_BIT(ODRB , u8PinNumCpy%8);
+		  break;
+  f2:	08 95       	ret
+		  case 1 :
+		  SET_BIT(ODRB , u8PinNumCpy%8);
+  f4:	48 b3       	in	r20, 0x18	; 24
+  f6:	87 70       	andi	r24, 0x07	; 7
+  f8:	21 e0       	ldi	r18, 0x01	; 1
+  fa:	30 e0       	ldi	r19, 0x00	; 0
+  fc:	b9 01       	movw	r22, r18
+  fe:	02 c0       	rjmp	.+4      	; 0x104 <DIO_enuWritePin+0x8a>
+ 100:	66 0f       	add	r22, r22
+ 102:	77 1f       	adc	r23, r23
+ 104:	8a 95       	dec	r24
+ 106:	e2 f7       	brpl	.-8      	; 0x100 <DIO_enuWritePin+0x86>
+ 108:	cb 01       	movw	r24, r22
+ 10a:	84 2b       	or	r24, r20
+ 10c:	88 bb       	out	0x18, r24	; 24
+	DDRD = CONC(DIO_u8DIR_PIN_31,DIO_u8DIR_PIN_30,DIO_u8DIR_PIN_29,DIO_u8DIR_PIN_28,DIO_u8DIR_PIN_27,DIO_u8DIR_PIN_26,DIO_u8DIR_PIN_25,DIO_u8DIR_PIN_24);
+}
+
+tenuErrorStatus DIO_enuWritePin(uint8  u8PinNumCpy ,uint8 u8PinValueCpy)
+{
+  tenuErrorStatus  enuReturnStatusLoc = E_OK ;
+ 10e:	80 e0       	ldi	r24, 0x00	; 0
+		  case 0 :
+		  CLR_BIT(ODRB , u8PinNumCpy%8);
+		  break;
+		  case 1 :
+		  SET_BIT(ODRB , u8PinNumCpy%8);
+		  break;
+ 110:	08 95       	ret
+		   enuReturnStatusLoc = E_NOK_PARAM_OUT_OF_RANGE;
+		  break;
+	  }
+  
+  }
+  else if(u8PinNumCpy >=16 && u8PinNumCpy <=23)
+ 112:	90 ef       	ldi	r25, 0xF0	; 240
+ 114:	98 0f       	add	r25, r24
+ 116:	98 30       	cpi	r25, 0x08	; 8
+ 118:	20 f5       	brcc	.+72     	; 0x162 <DIO_enuWritePin+0xe8>
+  {
+	  switch(u8PinValueCpy)
+ 11a:	66 23       	and	r22, r22
+ 11c:	19 f0       	breq	.+6      	; 0x124 <DIO_enuWritePin+0xaa>
+ 11e:	61 30       	cpi	r22, 0x01	; 1
+ 120:	89 f0       	breq	.+34     	; 0x144 <DIO_enuWritePin+0xca>
+ 122:	4b c0       	rjmp	.+150    	; 0x1ba <DIO_enuWritePin+0x140>
+	  {
+		  case 0 :
+		  CLR_BIT(ODRC , u8PinNumCpy%8);
+ 124:	45 b3       	in	r20, 0x15	; 21
+ 126:	87 70       	andi	r24, 0x07	; 7
+ 128:	21 e0       	ldi	r18, 0x01	; 1
+ 12a:	30 e0       	ldi	r19, 0x00	; 0
+ 12c:	b9 01       	movw	r22, r18
+ 12e:	02 c0       	rjmp	.+4      	; 0x134 <DIO_enuWritePin+0xba>
+ 130:	66 0f       	add	r22, r22
+ 132:	77 1f       	adc	r23, r23
+ 134:	8a 95       	dec	r24
+ 136:	e2 f7       	brpl	.-8      	; 0x130 <DIO_enuWritePin+0xb6>
+ 138:	cb 01       	movw	r24, r22
+ 13a:	80 95       	com	r24
+ 13c:	84 23       	and	r24, r20
+ 13e:	85 bb       	out	0x15, r24	; 21
+	DDRD = CONC(DIO_u8DIR_PIN_31,DIO_u8DIR_PIN_30,DIO_u8DIR_PIN_29,DIO_u8DIR_PIN_28,DIO_u8DIR_PIN_27,DIO_u8DIR_PIN_26,DIO_u8DIR_PIN_25,DIO_u8DIR_PIN_24);
+}
+
+tenuErrorStatus DIO_enuWritePin(uint8  u8PinNumCpy ,uint8 u8PinValueCpy)
+{
+  tenuErrorStatus  enuReturnStatusLoc = E_OK ;
+ 140:	80 e0       	ldi	r24, 0x00	; 0
+  {
+	  switch(u8PinValueCpy)
+	  {
+		  case 0 :
+		  CLR_BIT(ODRC , u8PinNumCpy%8);
+		  break;
+ 142:	08 95       	ret
+		  case 1 :
+		  SET_BIT(ODRC , u8PinNumCpy%8);
+ 144:	45 b3       	in	r20, 0x15	; 21
+ 146:	87 70       	andi	r24, 0x07	; 7
+ 148:	21 e0       	ldi	r18, 0x01	; 1
+ 14a:	30 e0       	ldi	r19, 0x00	; 0
+ 14c:	b9 01       	movw	r22, r18
+ 14e:	02 c0       	rjmp	.+4      	; 0x154 <DIO_enuWritePin+0xda>
+ 150:	66 0f       	add	r22, r22
+ 152:	77 1f       	adc	r23, r23
+ 154:	8a 95       	dec	r24
+ 156:	e2 f7       	brpl	.-8      	; 0x150 <DIO_enuWritePin+0xd6>
+ 158:	cb 01       	movw	r24, r22
+ 15a:	84 2b       	or	r24, r20
+ 15c:	85 bb       	out	0x15, r24	; 21
+	DDRD = CONC(DIO_u8DIR_PIN_31,DIO_u8DIR_PIN_30,DIO_u8DIR_PIN_29,DIO_u8DIR_PIN_28,DIO_u8DIR_PIN_27,DIO_u8DIR_PIN_26,DIO_u8DIR_PIN_25,DIO_u8DIR_PIN_24);
+}
+
+tenuErrorStatus DIO_enuWritePin(uint8  u8PinNumCpy ,uint8 u8PinValueCpy)
+{
+  tenuErrorStatus  enuReturnStatusLoc = E_OK ;
+ 15e:	80 e0       	ldi	r24, 0x00	; 0
+		  case 0 :
+		  CLR_BIT(ODRC , u8PinNumCpy%8);
+		  break;
+		  case 1 :
+		  SET_BIT(ODRC , u8PinNumCpy%8);
+		  break;
+ 160:	08 95       	ret
+		  default:
+		   enuReturnStatusLoc = E_NOK_PARAM_OUT_OF_RANGE;
+		  break;
+	  }
+  }
+  else if(u8PinNumCpy >=24 && u8PinNumCpy <=31)
+ 162:	98 ee       	ldi	r25, 0xE8	; 232
+ 164:	98 0f       	add	r25, r24
+ 166:	98 30       	cpi	r25, 0x08	; 8
+ 168:	50 f5       	brcc	.+84     	; 0x1be <DIO_enuWritePin+0x144>
+  {
+	  switch(u8PinValueCpy)
+ 16a:	66 23       	and	r22, r22
+ 16c:	19 f0       	breq	.+6      	; 0x174 <DIO_enuWritePin+0xfa>
+ 16e:	61 30       	cpi	r22, 0x01	; 1
+ 170:	89 f0       	breq	.+34     	; 0x194 <DIO_enuWritePin+0x11a>
+ 172:	27 c0       	rjmp	.+78     	; 0x1c2 <DIO_enuWritePin+0x148>
+	  {
+		  case 0 :
+		  CLR_BIT(ODRD , u8PinNumCpy%8);
+ 174:	42 b3       	in	r20, 0x12	; 18
+ 176:	87 70       	andi	r24, 0x07	; 7
+ 178:	21 e0       	ldi	r18, 0x01	; 1
+ 17a:	30 e0       	ldi	r19, 0x00	; 0
+ 17c:	b9 01       	movw	r22, r18
+ 17e:	02 c0       	rjmp	.+4      	; 0x184 <DIO_enuWritePin+0x10a>
+ 180:	66 0f       	add	r22, r22
+ 182:	77 1f       	adc	r23, r23
+ 184:	8a 95       	dec	r24
+ 186:	e2 f7       	brpl	.-8      	; 0x180 <DIO_enuWritePin+0x106>
+ 188:	cb 01       	movw	r24, r22
+ 18a:	80 95       	com	r24
+ 18c:	84 23       	and	r24, r20
+ 18e:	82 bb       	out	0x12, r24	; 18
+	DDRD = CONC(DIO_u8DIR_PIN_31,DIO_u8DIR_PIN_30,DIO_u8DIR_PIN_29,DIO_u8DIR_PIN_28,DIO_u8DIR_PIN_27,DIO_u8DIR_PIN_26,DIO_u8DIR_PIN_25,DIO_u8DIR_PIN_24);
+}
+
+tenuErrorStatus DIO_enuWritePin(uint8  u8PinNumCpy ,uint8 u8PinValueCpy)
+{
+  tenuErrorStatus  enuReturnStatusLoc = E_OK ;
+ 190:	80 e0       	ldi	r24, 0x00	; 0
+  {
+	  switch(u8PinValueCpy)
+	  {
+		  case 0 :
+		  CLR_BIT(ODRD , u8PinNumCpy%8);
+		  break;
+ 192:	08 95       	ret
+		  case 1 :
+		  SET_BIT(ODRD , u8PinNumCpy%8);
+ 194:	42 b3       	in	r20, 0x12	; 18
+ 196:	87 70       	andi	r24, 0x07	; 7
+ 198:	21 e0       	ldi	r18, 0x01	; 1
+ 19a:	30 e0       	ldi	r19, 0x00	; 0
+ 19c:	b9 01       	movw	r22, r18
+ 19e:	02 c0       	rjmp	.+4      	; 0x1a4 <DIO_enuWritePin+0x12a>
+ 1a0:	66 0f       	add	r22, r22
+ 1a2:	77 1f       	adc	r23, r23
+ 1a4:	8a 95       	dec	r24
+ 1a6:	e2 f7       	brpl	.-8      	; 0x1a0 <DIO_enuWritePin+0x126>
+ 1a8:	cb 01       	movw	r24, r22
+ 1aa:	84 2b       	or	r24, r20
+ 1ac:	82 bb       	out	0x12, r24	; 18
+	DDRD = CONC(DIO_u8DIR_PIN_31,DIO_u8DIR_PIN_30,DIO_u8DIR_PIN_29,DIO_u8DIR_PIN_28,DIO_u8DIR_PIN_27,DIO_u8DIR_PIN_26,DIO_u8DIR_PIN_25,DIO_u8DIR_PIN_24);
+}
+
+tenuErrorStatus DIO_enuWritePin(uint8  u8PinNumCpy ,uint8 u8PinValueCpy)
+{
+  tenuErrorStatus  enuReturnStatusLoc = E_OK ;
+ 1ae:	80 e0       	ldi	r24, 0x00	; 0
+		  case 0 :
+		  CLR_BIT(ODRD , u8PinNumCpy%8);
+		  break;
+		  case 1 :
+		  SET_BIT(ODRD , u8PinNumCpy%8);
+		  break;
+ 1b0:	08 95       	ret
+		  break;
+		  case 1 :
+		  SET_BIT(ODRA , u8PinNumCpy);
+		  break;
+		  default:
+		   enuReturnStatusLoc = E_NOK_PARAM_OUT_OF_RANGE;
+ 1b2:	82 e0       	ldi	r24, 0x02	; 2
+ 1b4:	08 95       	ret
+		  break;
+		  case 1 :
+		  SET_BIT(ODRB , u8PinNumCpy%8);
+		  break;
+		  default:
+		   enuReturnStatusLoc = E_NOK_PARAM_OUT_OF_RANGE;
+ 1b6:	82 e0       	ldi	r24, 0x02	; 2
+ 1b8:	08 95       	ret
+		  break;
+		  case 1 :
+		  SET_BIT(ODRC , u8PinNumCpy%8);
+		  break;
+		  default:
+		   enuReturnStatusLoc = E_NOK_PARAM_OUT_OF_RANGE;
+ 1ba:	82 e0       	ldi	r24, 0x02	; 2
+ 1bc:	08 95       	ret
+		  break;
+	  }
+  }
+  else
+  {
+	  enuReturnStatusLoc = E_NOK_PARAM_OUT_OF_RANGE;
+ 1be:	82 e0       	ldi	r24, 0x02	; 2
+ 1c0:	08 95       	ret
+		  break;
+		  case 1 :
+		  SET_BIT(ODRD , u8PinNumCpy%8);
+		  break;
+		  default:
+		   enuReturnStatusLoc = E_NOK_PARAM_OUT_OF_RANGE;
+ 1c2:	82 e0       	ldi	r24, 0x02	; 2
+  else
+  {
+	  enuReturnStatusLoc = E_NOK_PARAM_OUT_OF_RANGE;
+  }
+	return enuReturnStatusLoc ;
+}
+ 1c4:	08 95       	ret
+
+000001c6 <main>:
+	   uint8 hour1=1,hour2=1;
+   	   uint8 index_display;
+	   uint8 Gcounter=0;
+	   uint8 second1;
+	   uint8 second2;
+	DIO_voidInit();
+ 1c6:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_voidInit>
+   	SPIMaster_voidInit();
+ 1ca:	0e 94 e0 01 	call	0x3c0	; 0x3c0 <SPIMaster_voidInit>
+	MAX7721_voidInit();
+ 1ce:	0e 94 cf 01 	call	0x39e	; 0x39e <MAX7721_voidInit>
+{
+   	   uint8 counter = 0;
+	   uint8 minute1=1, minute2=1;
+	   uint8 hour1=1,hour2=1;
+   	   uint8 index_display;
+	   uint8 Gcounter=0;
+ 1d2:	00 e0       	ldi	r16, 0x00	; 0
+
+int main(void)
+{
+   	   uint8 counter = 0;
+	   uint8 minute1=1, minute2=1;
+	   uint8 hour1=1,hour2=1;
+ 1d4:	cc 24       	eor	r12, r12
+ 1d6:	c3 94       	inc	r12
+ 1d8:	dd 24       	eor	r13, r13
+ 1da:	d3 94       	inc	r13
+#include "avr/delay.h"
+
+int main(void)
+{
+   	   uint8 counter = 0;
+	   uint8 minute1=1, minute2=1;
+ 1dc:	ee 24       	eor	r14, r14
+ 1de:	e3 94       	inc	r14
+ 1e0:	ff 24       	eor	r15, r15
+ 1e2:	f3 94       	inc	r15
+#define F_CPU 1000000UL
+#include "avr/delay.h"
+
+int main(void)
+{
+   	   uint8 counter = 0;
+ 1e4:	d0 e0       	ldi	r29, 0x00	; 0
+   	SPIMaster_voidInit();
+	MAX7721_voidInit();
+
+   	while (1)
+   	{
+			 if(Gcounter<13)
+ 1e6:	0d 30       	cpi	r16, 0x0D	; 13
+ 1e8:	08 f0       	brcs	.+2      	; 0x1ec <main+0x26>
+ 1ea:	8f c0       	rjmp	.+286    	; 0x30a <main+0x144>
+			 {	   
+				  
+					if(counter<59)
+ 1ec:	db 33       	cpi	r29, 0x3B	; 59
+ 1ee:	d8 f0       	brcs	.+54     	; 0x226 <main+0x60>
+ 1f0:	1e c0       	rjmp	.+60     	; 0x22e <main+0x68>
+					{
+						for (second1 =0;second1<6;second1++)
+						{
+							execute(MAX7221_DIGIT6,second1);
+ 1f2:	61 2f       	mov	r22, r17
+ 1f4:	87 e0       	ldi	r24, 0x07	; 7
+ 1f6:	0e 94 a8 01 	call	0x350	; 0x350 <execute>
+							for(second2=1;second2<11;second2++)
+ 1fa:	c1 e0       	ldi	r28, 0x01	; 1
+ 1fc:	10 c0       	rjmp	.+32     	; 0x21e <main+0x58>
+							{
+								counter++;
+ 1fe:	df 5f       	subi	r29, 0xFF	; 255
+								execute(8,second2-1);
+ 200:	6f ef       	ldi	r22, 0xFF	; 255
+ 202:	6c 0f       	add	r22, r28
+ 204:	88 e0       	ldi	r24, 0x08	; 8
+ 206:	0e 94 a8 01 	call	0x350	; 0x350 <execute>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 20a:	2f e3       	ldi	r18, 0x3F	; 63
+ 20c:	8d e0       	ldi	r24, 0x0D	; 13
+ 20e:	93 e0       	ldi	r25, 0x03	; 3
+ 210:	21 50       	subi	r18, 0x01	; 1
+ 212:	80 40       	sbci	r24, 0x00	; 0
+ 214:	90 40       	sbci	r25, 0x00	; 0
+ 216:	e1 f7       	brne	.-8      	; 0x210 <main+0x4a>
+ 218:	00 c0       	rjmp	.+0      	; 0x21a <main+0x54>
+ 21a:	00 00       	nop
+					if(counter<59)
+					{
+						for (second1 =0;second1<6;second1++)
+						{
+							execute(MAX7221_DIGIT6,second1);
+							for(second2=1;second2<11;second2++)
+ 21c:	cf 5f       	subi	r28, 0xFF	; 255
+ 21e:	cb 30       	cpi	r28, 0x0B	; 11
+ 220:	70 f3       	brcs	.-36     	; 0x1fe <main+0x38>
+			 if(Gcounter<13)
+			 {	   
+				  
+					if(counter<59)
+					{
+						for (second1 =0;second1<6;second1++)
+ 222:	1f 5f       	subi	r17, 0xFF	; 255
+ 224:	01 c0       	rjmp	.+2      	; 0x228 <main+0x62>
+ 226:	10 e0       	ldi	r17, 0x00	; 0
+ 228:	16 30       	cpi	r17, 0x06	; 6
+ 22a:	18 f3       	brcs	.-58     	; 0x1f2 <main+0x2c>
+ 22c:	dc cf       	rjmp	.-72     	; 0x1e6 <main+0x20>
+					}
+					
+					else
+					{
+							counter=0;
+							execute(MAX7221_DIGIT6,0);
+ 22e:	60 e0       	ldi	r22, 0x00	; 0
+ 230:	87 e0       	ldi	r24, 0x07	; 7
+ 232:	0e 94 a8 01 	call	0x350	; 0x350 <execute>
+							execute(MAX7221_DIGIT7,0);
+ 236:	60 e0       	ldi	r22, 0x00	; 0
+ 238:	88 e0       	ldi	r24, 0x08	; 8
+ 23a:	0e 94 a8 01 	call	0x350	; 0x350 <execute>
+							
+							if(minute2<6) // still in minutes
+ 23e:	25 e0       	ldi	r18, 0x05	; 5
+ 240:	2e 15       	cp	r18, r14
+ 242:	48 f1       	brcs	.+82     	; 0x296 <main+0xd0>
+							{
+								
+								if (minute1<10)
+ 244:	89 e0       	ldi	r24, 0x09	; 9
+ 246:	8f 15       	cp	r24, r15
+ 248:	80 f0       	brcs	.+32     	; 0x26a <main+0xa4>
+								{
+									
+									execute(MAX7221_DIGIT5,minute1);
+ 24a:	6f 2d       	mov	r22, r15
+ 24c:	86 e0       	ldi	r24, 0x06	; 6
+ 24e:	0e 94 a8 01 	call	0x350	; 0x350 <execute>
+ 252:	9f e3       	ldi	r25, 0x3F	; 63
+ 254:	2d e0       	ldi	r18, 0x0D	; 13
+ 256:	83 e0       	ldi	r24, 0x03	; 3
+ 258:	91 50       	subi	r25, 0x01	; 1
+ 25a:	20 40       	sbci	r18, 0x00	; 0
+ 25c:	80 40       	sbci	r24, 0x00	; 0
+ 25e:	e1 f7       	brne	.-8      	; 0x258 <main+0x92>
+ 260:	00 c0       	rjmp	.+0      	; 0x262 <main+0x9c>
+ 262:	00 00       	nop
+									_delay_ms(1000);
+									minute1++;
+ 264:	f3 94       	inc	r15
+						}		  
+					}
+					
+					else
+					{
+							counter=0;
+ 266:	d0 e0       	ldi	r29, 0x00	; 0
+ 268:	be cf       	rjmp	.-132    	; 0x1e6 <main+0x20>
+									
+								}
+								else
+								{
+									minute1=1;
+									execute(MAX7221_DIGIT4,minute2);
+ 26a:	6e 2d       	mov	r22, r14
+ 26c:	85 e0       	ldi	r24, 0x05	; 5
+ 26e:	0e 94 a8 01 	call	0x350	; 0x350 <execute>
+									execute(MAX7221_DIGIT5,0);
+ 272:	60 e0       	ldi	r22, 0x00	; 0
+ 274:	86 e0       	ldi	r24, 0x06	; 6
+ 276:	0e 94 a8 01 	call	0x350	; 0x350 <execute>
+ 27a:	9f e3       	ldi	r25, 0x3F	; 63
+ 27c:	2d e0       	ldi	r18, 0x0D	; 13
+ 27e:	83 e0       	ldi	r24, 0x03	; 3
+ 280:	91 50       	subi	r25, 0x01	; 1
+ 282:	20 40       	sbci	r18, 0x00	; 0
+ 284:	80 40       	sbci	r24, 0x00	; 0
+ 286:	e1 f7       	brne	.-8      	; 0x280 <main+0xba>
+ 288:	00 c0       	rjmp	.+0      	; 0x28a <main+0xc4>
+ 28a:	00 00       	nop
+									_delay_ms(1000);
+									minute2++;
+ 28c:	e3 94       	inc	r14
+									minute1++;
+									
+								}
+								else
+								{
+									minute1=1;
+ 28e:	ff 24       	eor	r15, r15
+ 290:	f3 94       	inc	r15
+						}		  
+					}
+					
+					else
+					{
+							counter=0;
+ 292:	d0 e0       	ldi	r29, 0x00	; 0
+ 294:	a8 cf       	rjmp	.-176    	; 0x1e6 <main+0x20>
+							}
+							else // hours
+							{
+								minute2=1;
+								minute1=1;
+								Gcounter++;
+ 296:	0f 5f       	subi	r16, 0xFF	; 255
+								execute(MAX7221_DIGIT5,0);
+ 298:	60 e0       	ldi	r22, 0x00	; 0
+ 29a:	86 e0       	ldi	r24, 0x06	; 6
+ 29c:	0e 94 a8 01 	call	0x350	; 0x350 <execute>
+								execute(MAX7221_DIGIT4,0);
+ 2a0:	60 e0       	ldi	r22, 0x00	; 0
+ 2a2:	85 e0       	ldi	r24, 0x05	; 5
+ 2a4:	0e 94 a8 01 	call	0x350	; 0x350 <execute>
+								if(hour1<9)
+ 2a8:	98 e0       	ldi	r25, 0x08	; 8
+ 2aa:	9d 15       	cp	r25, r13
+ 2ac:	a0 f0       	brcs	.+40     	; 0x2d6 <main+0x110>
+								{
+									execute(MAX7221_DIGIT3,hour1);
+ 2ae:	6d 2d       	mov	r22, r13
+ 2b0:	84 e0       	ldi	r24, 0x04	; 4
+ 2b2:	0e 94 a8 01 	call	0x350	; 0x350 <execute>
+ 2b6:	2f e3       	ldi	r18, 0x3F	; 63
+ 2b8:	8d e0       	ldi	r24, 0x0D	; 13
+ 2ba:	93 e0       	ldi	r25, 0x03	; 3
+ 2bc:	21 50       	subi	r18, 0x01	; 1
+ 2be:	80 40       	sbci	r24, 0x00	; 0
+ 2c0:	90 40       	sbci	r25, 0x00	; 0
+ 2c2:	e1 f7       	brne	.-8      	; 0x2bc <main+0xf6>
+ 2c4:	00 c0       	rjmp	.+0      	; 0x2c6 <main+0x100>
+ 2c6:	00 00       	nop
+									_delay_ms(1000);
+									hour1++;
+ 2c8:	d3 94       	inc	r13
+									minute2++;
+								}
+							}
+							else // hours
+							{
+								minute2=1;
+ 2ca:	ee 24       	eor	r14, r14
+ 2cc:	e3 94       	inc	r14
+								minute1=1;
+ 2ce:	ff 24       	eor	r15, r15
+ 2d0:	f3 94       	inc	r15
+						}		  
+					}
+					
+					else
+					{
+							counter=0;
+ 2d2:	d0 e0       	ldi	r29, 0x00	; 0
+ 2d4:	88 cf       	rjmp	.-240    	; 0x1e6 <main+0x20>
+									hour1++;
+								}
+								else
+								{
+									hour1=1;
+									execute(MAX7221_DIGIT3,0);
+ 2d6:	60 e0       	ldi	r22, 0x00	; 0
+ 2d8:	84 e0       	ldi	r24, 0x04	; 4
+ 2da:	0e 94 a8 01 	call	0x350	; 0x350 <execute>
+									execute(MAX7221_DIGIT2,hour2);
+ 2de:	6c 2d       	mov	r22, r12
+ 2e0:	83 e0       	ldi	r24, 0x03	; 3
+ 2e2:	0e 94 a8 01 	call	0x350	; 0x350 <execute>
+ 2e6:	2f e3       	ldi	r18, 0x3F	; 63
+ 2e8:	8d e0       	ldi	r24, 0x0D	; 13
+ 2ea:	93 e0       	ldi	r25, 0x03	; 3
+ 2ec:	21 50       	subi	r18, 0x01	; 1
+ 2ee:	80 40       	sbci	r24, 0x00	; 0
+ 2f0:	90 40       	sbci	r25, 0x00	; 0
+ 2f2:	e1 f7       	brne	.-8      	; 0x2ec <main+0x126>
+ 2f4:	00 c0       	rjmp	.+0      	; 0x2f6 <main+0x130>
+ 2f6:	00 00       	nop
+									_delay_ms(1000);
+									hour2++;
+ 2f8:	c3 94       	inc	r12
+									_delay_ms(1000);
+									hour1++;
+								}
+								else
+								{
+									hour1=1;
+ 2fa:	dd 24       	eor	r13, r13
+ 2fc:	d3 94       	inc	r13
+									minute2++;
+								}
+							}
+							else // hours
+							{
+								minute2=1;
+ 2fe:	ee 24       	eor	r14, r14
+ 300:	e3 94       	inc	r14
+								minute1=1;
+ 302:	ff 24       	eor	r15, r15
+ 304:	f3 94       	inc	r15
+						}		  
+					}
+					
+					else
+					{
+							counter=0;
+ 306:	d0 e0       	ldi	r29, 0x00	; 0
+ 308:	6e cf       	rjmp	.-292    	; 0x1e6 <main+0x20>
+
+					  }
+					}
+					else
+					{
+						execute(MAX7221_DIGIT2,0);
+ 30a:	60 e0       	ldi	r22, 0x00	; 0
+ 30c:	83 e0       	ldi	r24, 0x03	; 3
+ 30e:	0e 94 a8 01 	call	0x350	; 0x350 <execute>
+						execute(MAX7221_DIGIT3,0);
+ 312:	60 e0       	ldi	r22, 0x00	; 0
+ 314:	84 e0       	ldi	r24, 0x04	; 4
+ 316:	0e 94 a8 01 	call	0x350	; 0x350 <execute>
+						execute(MAX7221_DIGIT4,0);
+ 31a:	60 e0       	ldi	r22, 0x00	; 0
+ 31c:	85 e0       	ldi	r24, 0x05	; 5
+ 31e:	0e 94 a8 01 	call	0x350	; 0x350 <execute>
+						execute(MAX7221_DIGIT5,0);
+ 322:	60 e0       	ldi	r22, 0x00	; 0
+ 324:	86 e0       	ldi	r24, 0x06	; 6
+ 326:	0e 94 a8 01 	call	0x350	; 0x350 <execute>
+						execute(MAX7221_DIGIT6,0);
+ 32a:	60 e0       	ldi	r22, 0x00	; 0
+ 32c:	87 e0       	ldi	r24, 0x07	; 7
+ 32e:	0e 94 a8 01 	call	0x350	; 0x350 <execute>
+						execute(MAX7221_DIGIT7,0);
+ 332:	60 e0       	ldi	r22, 0x00	; 0
+ 334:	88 e0       	ldi	r24, 0x08	; 8
+ 336:	0e 94 a8 01 	call	0x350	; 0x350 <execute>
+						minute1 =1;
+						minute2 =1;
+						counter=0;
+						Gcounter =0;
+ 33a:	00 e0       	ldi	r16, 0x00	; 0
+						hour1 =1;
+						hour2 =1;
+ 33c:	cc 24       	eor	r12, r12
+ 33e:	c3 94       	inc	r12
+						execute(MAX7221_DIGIT7,0);
+						minute1 =1;
+						minute2 =1;
+						counter=0;
+						Gcounter =0;
+						hour1 =1;
+ 340:	dd 24       	eor	r13, r13
+ 342:	d3 94       	inc	r13
+						execute(MAX7221_DIGIT4,0);
+						execute(MAX7221_DIGIT5,0);
+						execute(MAX7221_DIGIT6,0);
+						execute(MAX7221_DIGIT7,0);
+						minute1 =1;
+						minute2 =1;
+ 344:	ee 24       	eor	r14, r14
+ 346:	e3 94       	inc	r14
+						execute(MAX7221_DIGIT3,0);
+						execute(MAX7221_DIGIT4,0);
+						execute(MAX7221_DIGIT5,0);
+						execute(MAX7221_DIGIT6,0);
+						execute(MAX7221_DIGIT7,0);
+						minute1 =1;
+ 348:	ff 24       	eor	r15, r15
+ 34a:	f3 94       	inc	r15
+						minute2 =1;
+						counter=0;
+ 34c:	d0 e0       	ldi	r29, 0x00	; 0
+ 34e:	4b cf       	rjmp	.-362    	; 0x1e6 <main+0x20>
+
+00000350 <execute>:
+#include "STD_Types.h"
+#include "MAX7221.h"
+#include "SPI_int.h"
+
+void execute(unsigned char cmd, unsigned char data)
+{
+ 350:	0f 93       	push	r16
+ 352:	1f 93       	push	r17
+ 354:	cf 93       	push	r28
+ 356:	df 93       	push	r29
+ 358:	1f 92       	push	r1
+ 35a:	cd b7       	in	r28, 0x3d	; 61
+ 35c:	de b7       	in	r29, 0x3e	; 62
+ 35e:	08 2f       	mov	r16, r24
+ 360:	16 2f       	mov	r17, r22
+	uint8 x;
+	DIO_enuWritePin(12,0);//PORTB &= ~(1 << SS);
+ 362:	60 e0       	ldi	r22, 0x00	; 0
+ 364:	70 e0       	ldi	r23, 0x00	; 0
+ 366:	8c e0       	ldi	r24, 0x0C	; 12
+ 368:	90 e0       	ldi	r25, 0x00	; 0
+ 36a:	0e 94 3d 00 	call	0x7a	; 0x7a <DIO_enuWritePin>
+	SPI_u8Transceiver(cmd,&x);//SPDR = cmd;
+ 36e:	be 01       	movw	r22, r28
+ 370:	6f 5f       	subi	r22, 0xFF	; 255
+ 372:	7f 4f       	sbci	r23, 0xFF	; 255
+ 374:	80 2f       	mov	r24, r16
+ 376:	0e 94 f9 01 	call	0x3f2	; 0x3f2 <SPI_u8Transceiver>
+	SPI_u8Transceiver(data,&x);
+ 37a:	be 01       	movw	r22, r28
+ 37c:	6f 5f       	subi	r22, 0xFF	; 255
+ 37e:	7f 4f       	sbci	r23, 0xFF	; 255
+ 380:	81 2f       	mov	r24, r17
+ 382:	0e 94 f9 01 	call	0x3f2	; 0x3f2 <SPI_u8Transceiver>
+	DIO_enuWritePin(12,1);
+ 386:	61 e0       	ldi	r22, 0x01	; 1
+ 388:	70 e0       	ldi	r23, 0x00	; 0
+ 38a:	8c e0       	ldi	r24, 0x0C	; 12
+ 38c:	90 e0       	ldi	r25, 0x00	; 0
+ 38e:	0e 94 3d 00 	call	0x7a	; 0x7a <DIO_enuWritePin>
+}
+ 392:	0f 90       	pop	r0
+ 394:	df 91       	pop	r29
+ 396:	cf 91       	pop	r28
+ 398:	1f 91       	pop	r17
+ 39a:	0f 91       	pop	r16
+ 39c:	08 95       	ret
+
+0000039e <MAX7721_voidInit>:
+
+void MAX7721_voidInit(void)
+{
+   	execute(MAX7221_DECODE   , 0xFF);
+ 39e:	6f ef       	ldi	r22, 0xFF	; 255
+ 3a0:	89 e0       	ldi	r24, 0x09	; 9
+ 3a2:	0e 94 a8 01 	call	0x350	; 0x350 <execute>
+   	execute(MAX7221_INTENSITY, 0xFF);
+ 3a6:	6f ef       	ldi	r22, 0xFF	; 255
+ 3a8:	8a e0       	ldi	r24, 0x0A	; 10
+ 3aa:	0e 94 a8 01 	call	0x350	; 0x350 <execute>
+   	execute(MAX7221_ENABLE   , 0xFF);
+ 3ae:	6f ef       	ldi	r22, 0xFF	; 255
+ 3b0:	8c e0       	ldi	r24, 0x0C	; 12
+ 3b2:	0e 94 a8 01 	call	0x350	; 0x350 <execute>
+   	execute(MAX7221_SCAN     , 0xFF);
+ 3b6:	6f ef       	ldi	r22, 0xFF	; 255
+ 3b8:	8b e0       	ldi	r24, 0x0B	; 11
+ 3ba:	0e 94 a8 01 	call	0x350	; 0x350 <execute>
+ 3be:	08 95       	ret
+
+000003c0 <SPIMaster_voidInit>:
+}
+void SPISlave_voidInit(void)
+{
+	CLR_BIT(SPCR,4);
+	/*enable spi*/
+	SET_BIT(SPCR,6);
+ 3c0:	8d b1       	in	r24, 0x0d	; 13
+ 3c2:	80 61       	ori	r24, 0x10	; 16
+ 3c4:	8d b9       	out	0x0d, r24	; 13
+ 3c6:	8d b1       	in	r24, 0x0d	; 13
+ 3c8:	81 60       	ori	r24, 0x01	; 1
+ 3ca:	8d b9       	out	0x0d, r24	; 13
+ 3cc:	8d b1       	in	r24, 0x0d	; 13
+ 3ce:	8d 7f       	andi	r24, 0xFD	; 253
+ 3d0:	8d b9       	out	0x0d, r24	; 13
+ 3d2:	8e b1       	in	r24, 0x0e	; 14
+ 3d4:	81 60       	ori	r24, 0x01	; 1
+ 3d6:	8e b9       	out	0x0e, r24	; 14
+ 3d8:	8d b1       	in	r24, 0x0d	; 13
+ 3da:	87 7f       	andi	r24, 0xF7	; 247
+ 3dc:	8d b9       	out	0x0d, r24	; 13
+ 3de:	8d b1       	in	r24, 0x0d	; 13
+ 3e0:	8b 7f       	andi	r24, 0xFB	; 251
+ 3e2:	8d b9       	out	0x0d, r24	; 13
+ 3e4:	8d b1       	in	r24, 0x0d	; 13
+ 3e6:	8f 7d       	andi	r24, 0xDF	; 223
+ 3e8:	8d b9       	out	0x0d, r24	; 13
+ 3ea:	8d b1       	in	r24, 0x0d	; 13
+ 3ec:	80 64       	ori	r24, 0x40	; 64
+ 3ee:	8d b9       	out	0x0d, r24	; 13
+ 3f0:	08 95       	ret
+
+000003f2 <SPI_u8Transceiver>:
+}
+tenuErrorStatus SPI_u8Transceiver(uint8 u8DataCpy,uint8 * RecievData)
+{
+	tenuErrorStatus ErrorStatusReturnVal=E_OK;
+	if(RecievData==NULL_PTR)
+ 3f2:	61 15       	cp	r22, r1
+ 3f4:	71 05       	cpc	r23, r1
+ 3f6:	41 f0       	breq	.+16     	; 0x408 <__EEPROM_REGION_LENGTH__+0x8>
+	{
+		ErrorStatusReturnVal = E_NOK_PARAM_NULL_POINTER;
+	}
+	else
+	{
+		SPDR = u8DataCpy;
+ 3f8:	8f b9       	out	0x0f, r24	; 15
+		while(GET_BIT(SPSR,7)==0);
+ 3fa:	77 9b       	sbis	0x0e, 7	; 14
+ 3fc:	fe cf       	rjmp	.-4      	; 0x3fa <SPI_u8Transceiver+0x8>
+		* RecievData = SPDR;
+ 3fe:	8f b1       	in	r24, 0x0f	; 15
+ 400:	fb 01       	movw	r30, r22
+ 402:	80 83       	st	Z, r24
+	/*enable spi*/
+	SET_BIT(SPCR,6);
+}
+tenuErrorStatus SPI_u8Transceiver(uint8 u8DataCpy,uint8 * RecievData)
+{
+	tenuErrorStatus ErrorStatusReturnVal=E_OK;
+ 404:	80 e0       	ldi	r24, 0x00	; 0
+ 406:	08 95       	ret
+	if(RecievData==NULL_PTR)
+	{
+		ErrorStatusReturnVal = E_NOK_PARAM_NULL_POINTER;
+ 408:	83 e0       	ldi	r24, 0x03	; 3
+		SPDR = u8DataCpy;
+		while(GET_BIT(SPSR,7)==0);
+		* RecievData = SPDR;
+	}
+	return ErrorStatusReturnVal;
+}
+ 40a:	08 95       	ret
+
+0000040c <_exit>:
+ 40c:	f8 94       	cli
+
+0000040e <__stop_program>:
+ 40e:	ff cf       	rjmp	.-2      	; 0x40e <__stop_program>
