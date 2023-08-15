@@ -1,4 +1,4 @@
-#@copyright :ziad
+
 CC=arm-none-eabi-
 CFLAGS= -mcpu=cortex-m3 -gdwarf-2
 INCS=-I .
